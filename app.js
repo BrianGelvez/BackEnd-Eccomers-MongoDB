@@ -103,7 +103,7 @@ console.log(req.body);
     if(!files.length){
       return res.status(400).json({ err:'Please upload an image', msg:'Please upload an image' })
     }
-    let file = req.files[0]
+    let file = req.body[0]
     if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
         return res.json({"image" : file.filename}) 
     }
