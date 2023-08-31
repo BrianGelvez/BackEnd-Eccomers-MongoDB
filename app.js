@@ -94,23 +94,24 @@ app.get("/admin/order-status",[isAdmin],changeStatusOfOrder)
 app.get("/admin/users",[isAdmin],getAllUsers)
 
 // HELPER
-app.post('/photos/upload', upload.array('photos', 12), function (req, res, next) {  
-  // req.files is array of `photos` files
-  console.log(req.body);
-  try{
-    let files = req.files;
-    if(!files.length){
-      return res.status(400).json({ err:'Please upload an image', msg:'Please upload an image' })
+app.post('/photos/upload', function (req, res) {
+  try {
+    const imageBase64 = req.body.photos; // Accedemos a la imagen en el cuerpo de la solicitud
+
+    if (!imageBase64) {
+      return res.status(400).json({ err: 'Please send an image in the request body', msg: 'Please send an image in the request body' });
     }
-    let file = req.files[0]
-    if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
-        return res.json({"image" : file.filename}) 
-    }
+
+    // Aquí puedes procesar la imagen, que está en formato base64
+
+    // Por ejemplo, puedes guardarla en el sistema de archivos o en una base de datos.
+
+    // Luego, puedes responder con un mensaje de éxito
+    return res.json({ message: 'Image uploaded successfully' });
+  } catch (error) {
+    return res.status(500).send(error.message);
   }
-  catch(error){
-    return res.send(error.message)
-  }
-})
+});
 
 
 app.listen((process.env.PORT || 8081), () => {
