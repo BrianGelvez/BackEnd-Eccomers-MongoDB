@@ -96,6 +96,8 @@ app.get("/admin/users",[isAdmin],getAllUsers)
 // HELPER
 app.post('/photos/upload', function (req, res) {
   try {
+    console.log("photos:", req.body.photos);
+    console.log("body:", req.body);
     const imageBase64 = req.body.photos; // Accedemos a la imagen en el cuerpo de la solicitud
 
     if (!imageBase64) {
