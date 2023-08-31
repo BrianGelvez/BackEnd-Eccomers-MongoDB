@@ -96,6 +96,8 @@ app.get("/admin/users",[isAdmin],getAllUsers)
 // HELPER
 app.post('/photos/upload', upload.single('image'), function (req, res) {
   try {
+    console.log("req.body:", req.body);
+    console.log("req.file:", req.file,);
     if (!req.file) {
       return res.status(400).json({ err: 'Please send an image', msg: 'Please send an image' });
     }
