@@ -96,7 +96,7 @@ app.get("/admin/users",[isAdmin],getAllUsers)
 // HELPER
 app.post('/photos/upload', upload.array('photos', 12), function (req, res, next) {  
   // req.files is array of `photos` files
-console.log(upload);
+console.log(req);
   try{
     let files = req.files;
     if(!files.length){
