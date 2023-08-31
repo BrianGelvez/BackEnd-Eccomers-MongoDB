@@ -96,9 +96,7 @@ app.get("/admin/users",[isAdmin],getAllUsers)
 // HELPER
 app.post('/photos/upload', function (req, res) {
   try {
-    console.log("photos:", req.body.photos);
-    console.log("body:", req.body);
-    const imageBase64 = req.body.photos; // Accedemos a la imagen en el cuerpo de la solicitud
+    const imageBase64 = req.body; // Accedemos al cuerpo de la solicitud
 
     if (!imageBase64) {
       return res.status(400).json({ err: 'Please send an image in the request body', msg: 'Please send an image in the request body' });
