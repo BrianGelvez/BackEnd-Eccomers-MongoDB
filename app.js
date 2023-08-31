@@ -100,10 +100,11 @@ console.log("LOG DE REQ.BODY",req.body);
   try{
     let files = req.body;
     console.log("LOG DE FILES EN ARRAY",Object.values(files));
-    if(!files.length){
+    let fileArray = Object.values(files[0])
+    if(!fileArray){
       return res.status(400).json({ err:'Please upload an image', msg:'Please upload an image' })
     }
-    let file = req.files[0]
+    let file = fileArray;
     if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
         return res.json({"image" : file.filename}) 
     }
