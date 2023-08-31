@@ -96,15 +96,13 @@ app.get("/admin/users",[isAdmin],getAllUsers)
 // HELPER
 app.post('/photos/upload', upload.array('photos', 12), function (req, res, next) {  
   // req.files is array of `photos` files
-console.log("LOG DE REQ.BODY",req.body);
+
   try{
-    let files = req.body;
-    console.log("LOG DE FILES EN ARRAY",Object.values(files));
-    let fileArray = Object.values(files[0])
-    if(!fileArray){
+    let files = req.files;
+    if(!files.length){
       return res.status(400).json({ err:'Please upload an image', msg:'Please upload an image' })
     }
-    let file = fileArray;
+    let file = req.files[0]
     if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
         return res.json({"image" : file.filename}) 
     }
@@ -113,6 +111,7 @@ console.log("LOG DE REQ.BODY",req.body);
     return res.send(error.message)
   }
 })
+
 
 app.listen((process.env.PORT || 8081), () => {
   console.log(`Example app listening on port ${process.env.PORT}!`)
